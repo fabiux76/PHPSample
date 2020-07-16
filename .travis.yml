@@ -2,14 +2,10 @@ language: php
 php:
   - "7.2"
 
-install:
-  - composer install
-  - composer dump -o
-
 script:
   - echo 'what should I do?'
 
-before_deploy: "echo 'ready?'"
+before_deploy: echo 'ready?'
 
 deploy:
   provider: elasticbeanstalk
