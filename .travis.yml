@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t fabioadani/PHPSample -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true fabioadani/PHPSample npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "tutorials-2"
+  env: "Tutorials2-env"
+  bucket_name: "elasticbeanstalk-eu-west-1-955501240318"
+  bucket_path: "tutorials-2"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

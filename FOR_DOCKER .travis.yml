@@ -1,0 +1,17 @@
+language: php
+php:
+  - "7.0"
+
+before_deploy: "echo 'ready?'"
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "tutorials-2"
+  env: "Tutorials2-env"
+  bucket_name: "elasticbeanstalk-eu-west-1-955501240318"
+  bucket_path: "tutorials-2"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
