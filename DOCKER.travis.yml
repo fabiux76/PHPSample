@@ -1,8 +1,12 @@
-language: php
-php:
-  - "7.0"
+sudo: required
+services:
+  - docker
 
-before_deploy: "echo 'ready?'"
+before_install:
+  - docker build -t fabioadani/PHPSample -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true fabioadani/PHPSample npm run test -- --coverage
 
 deploy:
   provider: elasticbeanstalk
