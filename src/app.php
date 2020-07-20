@@ -25,10 +25,13 @@ $app->match('/', function () use ($app) {
     $query = $app['db']->prepare("SELECT message, author FROM {$app['db.table']}");
     $thoughts = $query->execute() ? $query->fetchAll(PDO::FETCH_ASSOC) : array();
 
+    $ip = file_get_contents('https://api.ipify.org');
+
     return $app['twig']->render('index.twig', array(
-        'title'    => 'Your Thoughts - V6',
+        'title'    => 'Your ip is ' . $ip,
         'thoughts' => $thoughts,
     ));
+
 });
 
 // Handle the add page
